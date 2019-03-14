@@ -1,5 +1,4 @@
 import { app, BrowserWindow } from 'electron'; // eslint-disable-line
-import createPresistentWindow from './helpers/create-persistent-window';
 
 /**
  * Set `__static` path to static files in production
@@ -28,7 +27,9 @@ function createMain() {
    * Initial window options
    */
 
-  mainWindow = createPresistentWindow('main', {
+  mainWindow = new BrowserWindow({
+    x: -1000,
+    y: 100,
     width: 1000,
     height: 800,
   });
