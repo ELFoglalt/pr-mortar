@@ -1,1 +1,10 @@
+# Core
+☐ Load pr map
+☐ Command for placing firing position
+☐ Command for placing target
+☐ Outputting firing solution
+
+
 ☐ Persist window position
+☐ Figure out product name vs package name
+☐ Detect PR installation location using winreg

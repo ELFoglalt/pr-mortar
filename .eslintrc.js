@@ -26,7 +26,7 @@ module.exports = {
     'no-trailing-spaces': [2, {'skipBlankLines': true}],
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
-    // Warnings over errors
+    // warnings over errors
     'no-useless-constructor': 1,
     'padded-blocks': 1,
     'no-multiple-empty-lines': 1,

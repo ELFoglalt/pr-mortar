@@ -1,20 +1,28 @@
 <template>
-  <div id="app">
-    <landing-page></landing-page>
+  <div id='app'>
+    <map-page></map-page>
   </div>
 </template>
 
 <script>
-  import LandingPage from '@/components/LandingPage';
+import MapPage from '@/components/MapPage';
 
-  export default {
-    name: 'pr-mortar',
-    components: {
-      LandingPage,
-    },
-  };
+export default {
+  name: 'pr-mortar',
+  components: {
+    MapPage,
+  },
+};
 </script>
 
-<style>
-  /* CSS */
+<style lang="scss">
+body {
+  height: 100vh;
+  margin: 0;
+}
+
+#app {
+  height: inherit;
+  width: 100%;
+}
 </style>

@@ -1,7 +1,7 @@
 {
   "name": "pr-mortar",
   "version": "0.1.0",
-  "author": "Máté Kerekes <everydaymadnes@gmail.com>",
+  "author": "Aleon <everydaymadnes@gmail.com>",
   "description": "A mortar calculator for the Battlefield 2 modification Project Reality.",
   "license": null,
   "main": "./dist/electron/main.js",
@@ -19,7 +19,7 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
-    "productName": "PRMortar",
+    "productName": "pr-mortar",
     "appId": "app.prmortar",
     "directories": {
       "output": "build"
@@ -54,10 +54,14 @@
   },
   "dependencies": {
     "fs-jetpack": "^2.2.2",
+    "iohook": "^0.4.0",
+    "mathjs": "^5.7.0",
+    "robotjs": "^0.5.1",
     "vue": "^2.5.16",
     "vue-electron": "^1.0.6",
     "vuex": "^3.0.1",
-    "vuex-electron": "^1.0.0"
+    "vuex-electron": "^1.0.0",
+    "winreg": "^1.2.4"
   },
   "devDependencies": {
     "ajv": "^6.5.0",

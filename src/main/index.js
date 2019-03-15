@@ -1,26 +1,29 @@
-import { app, BrowserWindow } from 'electron'; // eslint-disable-line
+import { app, BrowserWindow, remote } from 'electron'; // eslint-disable-line
 
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
  */
 if (process.env.NODE_ENV !== 'development') {
-  global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\'); // eslint-disable-line
+  global.__static = require('path') // eslint-disable-line
+    .join(__dirname, '/static') // eslint-disable-line
+    .replace(/\\/g, '\\\\'); // eslint-disable-line
 }
 
 // Save userData in separate folders for each environment.
 // Thanks to this you can use production and development versions of the app
 // on same machine like those are two separate apps.
-if (process.env.name !== 'production') {
+if (process.env.NODE_ENV !== 'production') {
   const userDataPath = app.getPath('userData');
-  app.setPath('userData', `${userDataPath}-(${process.env.name})`);
+  app.setPath('userData', `${userDataPath}-(${process.env.NODE_ENV})`);
 }
 
 let mainWindow; // Keeping a reference to the window avoids it getting garbage collected.
 
-const winURL = process.env.NODE_ENV === 'development'
-  ? 'http://localhost:9080'
-  : `file://${__dirname}/index.html`;
+const winURL =
+  process.env.NODE_ENV === 'development'
+    ? 'http://localhost:9080'
+    : `file://${__dirname}/index.html`;
 
 function createMain() {
   /**
@@ -60,7 +63,7 @@ app.on('activate', () => {
 /**
  * Auto Updater
  *
- * Uncomment the following code below and install `electron-updater` to
+ * Uncomment the following code below and install "electron-updater" to
  * support auto updating. Code Signing with a valid certificate is required.
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
  */
