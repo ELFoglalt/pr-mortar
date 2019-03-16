@@ -31,8 +31,8 @@ function createMain() {
    */
 
   mainWindow = new BrowserWindow({
-    x: -1000,
-    y: 100,
+    // x: -1000,
+    // y: 100,
     width: 1000,
     height: 800,
   });
