@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import CommandLine from './MapPage/CommandLine';
-import MapView from './MapPage/MapView';
+import CommandLine from './CommandLine';
+import MapView from './MapView';
 
 export default {
   name: 'map-page',

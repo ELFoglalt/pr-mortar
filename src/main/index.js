@@ -44,6 +44,13 @@ function createMain() {
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
+
+  if (process.env.NODE_ENV === 'development') {
+    mainWindow.webContents.once('dom-ready', () => {
+      
+      mainWindow.webContents.openDevTools();
+    });
+  }
 }
 
 app.on('ready', createMain);
