@@ -1,10 +1,19 @@
+# Options
+✔ Test in-game mouse events detection @done(19-03-17 16:43)
+- Works in-game when launched as admin
+☐ Test multi-monitor mouse placement options
+☐ Test robotjs mouse positioning
+☐ Test text to speech (say.js?)
+
 # Core
 ☐ Load pr map
 ☐ Command for placing firing position
 ☐ Command for placing target
 ☐ Outputting firing solution
 
-
 ☐ Persist window position
 ☐ Figure out product name vs package name
 ☐ Detect PR installation location using winreg
+
+# Other
+☐ Remove MapPage. We don't need pages.

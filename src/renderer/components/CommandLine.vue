@@ -5,9 +5,6 @@
 <script>
 export default {
   name: 'command-line',
-  data() {
-    return {};
-  },
 };
 </script>
 

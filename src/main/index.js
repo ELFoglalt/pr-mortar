@@ -45,9 +45,8 @@ function createMain() {
     mainWindow = null;
   });
 
-  if (process.env.NODE_ENV === 'development') {
+  if (true /* process.env.NODE_ENV === 'development' */ ) { // eslint-disable-line
     mainWindow.webContents.once('dom-ready', () => {
-      
       mainWindow.webContents.openDevTools();
     });
   }
