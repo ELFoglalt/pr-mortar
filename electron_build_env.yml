@@ -1,0 +1,3 @@
+name: electron_rebuild
+dependencies:
+  - python=2.7.3

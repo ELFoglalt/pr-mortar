@@ -4,32 +4,50 @@
 
 #### Build Setup
 
-``` bash
+```bash
 # install dependencies
-npm install
+$ npm install
+
+# build robotjs*
+$ ./node_modules/.bin/electron-rebuild.cmd
 
 # serve with hot reload at localhost:9080
-npm run dev
+$ npm run dev
 
 # build electron application for production
-npm run build
-
+$ npm run build
 
 # lint all JS/Vue component files in `src/`
-npm run lint
+$ npm run lint
 
 ```
 
-### On windows
+### Build notes
 
-Make sure the windows-build-tools are installed.
+#### Building robotjs
+
+The project requires a native build of robotjs, which is done using `electron-rebuild`. This requires python 2.7.0 and VS 2013 (MSBuild v12).
+
+Setting up a python env using conda:
+
+```bash
+$ conda env create -f electron_build_env.yml
+
+# run electron-rebuild ('winpty' and 'source' are required in bash only)
+$ source activate electron_rebuild
+$ winpty ./node_modules/.bin/electron-rebuild.cmd
+$ source deactivate
+```
+
+#### Make sure the windows-build-tools are installed
+
 ```bash
 
 # check if the package is available globally
-npm list -g --depth 0
+$ npm list -g --depth 0
 
 # install from an elevated command prompt
-npm install -g windows-build-tools
+$ npm install -g windows-build-tools
 
 ```
 

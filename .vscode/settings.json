@@ -1,1 +1,6 @@
-{}
+{
+    "eslint.enable": true,
+    "prettier.eslintIntegration": true,
+    "eslint.alwaysShowStatus": true,
+    "vetur.format.defaultFormatter.js": "prettier-eslint"
+}

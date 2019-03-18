@@ -1,4 +1,5 @@
 import { app, BrowserWindow, remote } from 'electron'; // eslint-disable-line
+import * as robot from 'robotjs';
 
 /**
  * Set `__static` path to static files in production
@@ -45,10 +46,14 @@ function createMain() {
     mainWindow = null;
   });
 
-  if (true /* process.env.NODE_ENV === 'development' */ ) { // eslint-disable-line
+  // TODO: Remove the console on production.
+  // eslint-disable-next-line
+  if (true /* process.env.NODE_ENV === 'development' */) {
     mainWindow.webContents.once('dom-ready', () => {
       mainWindow.webContents.openDevTools();
     });
+
+    robot.moveMouse(0, 0);
   }
 }
 
@@ -65,23 +70,3 @@ app.on('activate', () => {
     createMain();
   }
 });
-
-/**
- * Auto Updater
- *
- * Uncomment the following code below and install "electron-updater" to
- * support auto updating. Code Signing with a valid certificate is required.
- * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
- */
-
-/*
-import { autoUpdater } from 'electron-updater'
-
-autoUpdater.on('update-downloaded', () => {
-  autoUpdater.quitAndInstall()
-})
-
-app.on('ready', () => {
-  if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
-})
- */
