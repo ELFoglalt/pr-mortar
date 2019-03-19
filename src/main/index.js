@@ -1,5 +1,4 @@
-import { app, BrowserWindow, remote } from 'electron'; // eslint-disable-line
-import * as robot from 'robotjs';
+import { app, BrowserWindow } from 'electron'; // eslint-disable-line
 
 /**
  * Set `__static` path to static files in production
@@ -52,8 +51,6 @@ function createMain() {
     mainWindow.webContents.once('dom-ready', () => {
       mainWindow.webContents.openDevTools();
     });
-
-    robot.moveMouse(0, 0);
   }
 }
 

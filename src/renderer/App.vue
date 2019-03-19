@@ -1,16 +1,16 @@
 <template>
   <div id='app'>
-    <map-page></map-page>
+    <test-page></test-page>
   </div>
 </template>
 
 <script>
-import MapPage from '@/components/MapPage';
+import TestPage from '@/components/TestPage';
 
 export default {
   name: 'pr-mortar',
   components: {
-    MapPage,
+    TestPage,
   },
 };
 </script>
