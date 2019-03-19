@@ -1,27 +1,26 @@
-Options
-✔ Test in-game mouse events detection @done(19-03-17 16:43)
-- Works in-game when launched as admin
+Core:
+    ☐ Load pr map
+    ☐ Command input parser
+    ☐ Build keyboard blocking version of iohook
+    ☐ UI for firing solution output
 
-✔ Test multi-monitor mouse placement options @done(19-03-19 04:38)
+Exploration:
+    ✔ Test in-game mouse events detection @done(19-03-17 16:43)
+        > Works in-game when launched as admin
+    ✔ Test multi-monitor mouse placement options @done(19-03-19 04:38)
+    ✘ Test robotjs mouse positioning @cancelled(19-03-19 14:31)
+        > In-game mouse is not moving consistently enough
+        > Robotjs as mouse position input is *not reliable*.
+    ✔ Test input based on keystrokes @done(19-03-19 14:27)
+        > Electron global shortucts *do not work*.
+        > Use iohook
+    ☐ Test text to speech (say.js?)
+    ☐ Explore image/printscreen based detection
 
-✘ Test robotjs mouse positioning @cancelled(19-03-19 04:38)
-- In-game mouse is not moving consistently enough
+Enhancements:
+    ☐ Persist window position
+    ☐ Figure out product name vs package name clash
+    ☐ Detect PR installation location using winreg
 
-☐ Implement input based on keystrokes using iohook
-- Native shortucts _do not work_
-
-☐ Test text to speech (say.js?)
-
-Core
-☐ Load pr map
-☐ Command for placing firing position
-☐ Command for placing target
-☐ Outputting firing solution
-
-☐ Persist window position
-☐ Figure out product name vs package name
-☐ Detect PR installation location using winreg
-
-Other
-✔ Remove MapPage. We don't need pages. @done(19-03-19 04:39)
-☐ Explore image/printscreen based detection
+Chore:
+    ✔ Remove MapPage. We don't need pages. @done(19-03-19 04:39)

@@ -2,5 +2,6 @@
     "eslint.enable": true,
     "prettier.eslintIntegration": true,
     "eslint.alwaysShowStatus": true,
-    "vetur.format.defaultFormatter.js": "prettier-eslint"
+    "vetur.format.defaultFormatter.js": "prettier-eslint",
+    "python.pythonPath": "C:\\Dev\\Anaconda3\\python.exe"
 }
