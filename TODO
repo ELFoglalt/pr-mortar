@@ -1,11 +1,18 @@
-# Options
+Options
 ✔ Test in-game mouse events detection @done(19-03-17 16:43)
 - Works in-game when launched as admin
-☐ Test multi-monitor mouse placement options
-☐ Test robotjs mouse positioning
+
+✔ Test multi-monitor mouse placement options @done(19-03-19 04:38)
+
+✘ Test robotjs mouse positioning @cancelled(19-03-19 04:38)
+- In-game mouse is not moving consistently enough
+
+☐ Implement input based on keystrokes using iohook
+- Native shortucts _do not work_
+
 ☐ Test text to speech (say.js?)
 
-# Core
+Core
 ☐ Load pr map
 ☐ Command for placing firing position
 ☐ Command for placing target
@@ -15,5 +22,6 @@
 ☐ Figure out product name vs package name
 ☐ Detect PR installation location using winreg
 
-# Other
-☐ Remove MapPage. We don't need pages.
+Other
+✔ Remove MapPage. We don't need pages. @done(19-03-19 04:39)
+☐ Explore image/printscreen based detection
