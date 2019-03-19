@@ -26,6 +26,14 @@ $ npm run lint
 
 #### Building robotjs
 
+> Robotjs is no longer part of the project.
+> This section remains here for futureproofing reasons.
+> TODO: remove when in-game input methods are finalized.
+>
+> If robotjs is needed again:  
+> `npm install --save robotjs && npm install --save-dev electron-rebuid`  
+> Recover `electron_build_env.yml` from `956031026314e89281c9aed26716547bf6940b70`
+
 The project requires a native build of robotjs, which is done using `electron-rebuild`. This requires python 2.7.0 and VS 2013 (MSBuild v12).
 
 Setting up a python env using conda:
