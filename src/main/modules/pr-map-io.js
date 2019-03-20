@@ -1,11 +1,10 @@
-import * as fs from 'fs';
-import * as unzipper from 'unzipper';
-
-const path = require('path');
-const { promisify } = require('util');
-const ndarray = require('ndarray');
-const unpack = require('ndarray-unpack');
-const { mulseq, addseq, maxseq } = require('ndarray-ops');
+import fs from 'fs';
+import unzipper from 'unzipper';
+import path from 'path';
+import { promisify } from 'util';
+import unpack from 'ndarray-unpack';
+import ndarray from 'ndarray';
+import { mulseq, addseq, maxseq } from 'ndarray-ops';
 
 async function unzip(zipPath, outFolder, filePath) {
   const directory = await unzipper.Open.file(zipPath);

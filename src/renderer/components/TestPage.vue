@@ -8,7 +8,6 @@
 <script>
 import * as ioHook from 'iohook';
 import * as robotjs from 'robotjs'; // eslint-disable-line
-import { remote } from 'electron';
 import CommandLine from './CommandLine';
 import MapView from './MapView';
 
