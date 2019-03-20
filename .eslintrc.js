@@ -26,6 +26,8 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 2 : 0,
     // allow electron imports
     'import/no-extraneous-dependencies': 0,
+    // this is the most retarded thing in the airbnb style guide ever
+    'no-restricted-syntax': [0, 'ForOfStatement'],
     // warnings over errors
     'no-useless-constructor': 1,
     'padded-blocks': 1,

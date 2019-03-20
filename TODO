@@ -1,6 +1,11 @@
 Core:
     ✔ Load pr map @started(19-03-19 14:49) @done(19-03-20 04:15) @lasted(13h26m39s)
-    ☐ Command input parser
+    ☐ Command input parser @started(19-03-20 17:23)
+        ✔ Command structure @done(19-03-20 20:16)
+        ☐ Constant structure
+            ☐ Point
+            ☐ Distance
+        ☐ Parser utility/sm?
     ☐ Build keyboard blocking version of iohook
     ☐ UI for firing solution output
 
