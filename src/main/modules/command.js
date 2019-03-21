@@ -8,7 +8,7 @@ function match(str, cmd) {
   return cmd.aliases.find(alias => str.startsWith(alias));
 }
 
-function fromString(str) {
+function commandFromString(str) {
   const matchedAliases = allCommands.map(cmd => match(str, cmd));
   const idx = matchedAliases.findIndex(alias => alias !== undefined);
   return idx === -1

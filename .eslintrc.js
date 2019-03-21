@@ -28,6 +28,13 @@ module.exports = {
     'import/no-extraneous-dependencies': 0,
     // this is the most retarded thing in the airbnb style guide ever
     'no-restricted-syntax': [0, 'ForOfStatement'],
+    // allow mixed with same precedence
+    'no-mixed-operators': [
+      'error',
+      {
+        allowSamePrecedence: true,
+      },
+    ],
     // warnings over errors
     'no-useless-constructor': 1,
     'padded-blocks': 1,

@@ -89,13 +89,15 @@ function toArrayBuffer(buf) {
   return ab;
 }
 
+// heieghtData.get(x, y): x selects column (left->right), y selects row (top->bottom) on map;
 async function loadHeightData(path, shape = [1025, 1025]) {
   const buffer = toArrayBuffer(await readFilePromise(path));
 
-  // ndarray.get(x, y): x selects row, y selects column on map;
   const heightDataAsUInt16 = ndarray(new Uint16Array(buffer));
   const heightDataUnpacked = unpack(heightDataAsUInt16);
-  const heightDataAsNumber = ndarray(heightDataUnpacked, shape).step(-1, 1);
+  const heightDataAsNumber = ndarray(heightDataUnpacked, shape)
+    .step(-1, 1)
+    .transpose();
 
   return heightDataAsNumber;
 }

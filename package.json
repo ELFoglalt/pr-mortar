@@ -60,6 +60,7 @@
     "ndarray-ops": "^1.2.2",
     "ndarray-unpack": "^1.0.0",
     "unzipper": "^0.9.11",
+    "vector2d": "^3.0.0",
     "vue": "^2.5.16",
     "vue-electron": "^1.0.6",
     "vuex": "^3.0.1",
