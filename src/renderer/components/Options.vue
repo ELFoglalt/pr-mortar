@@ -1,10 +1,9 @@
 <template>
-  <div>This is the Map</div>
+  <div>This is the options</div>
 </template>
 
 <script>
 export default {
-  name: 'map-view',
   data() {
     return {};
   },

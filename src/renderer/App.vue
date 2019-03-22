@@ -1,16 +1,19 @@
 <template>
   <div id='app'>
-    <test-page></test-page>
+    <Options/>
+    <CommandLine/>
   </div>
 </template>
 
 <script>
-import TestPage from '@/components/TestPage';
+import CommandLine from '@/components/CommandLine';
+import Options from '@/components/Options';
 
 export default {
   name: 'pr-mortar',
   components: {
-    TestPage,
+    CommandLine,
+    Options,
   },
 };
 </script>

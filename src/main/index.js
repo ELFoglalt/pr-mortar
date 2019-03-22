@@ -1,4 +1,5 @@
-import { app, BrowserWindow } from 'electron'; // eslint-disable-line
+import { app, BrowserWindow } from 'electron';
+import { startKeyboardEvent, stopKeyboardEvent } from './modules/keyboard-hook';
 
 /**
  * Set `__static` path to static files in production
@@ -31,21 +32,25 @@ function createMain() {
    */
 
   mainWindow = new BrowserWindow({
-    // x: -1000,
-    // y: 100,
+    x: -1000,
+    y: 100,
     width: 1000,
     height: 800,
+    show: false,
   });
 
   mainWindow.setMenu(null);
-
   mainWindow.loadURL(winURL);
+
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show();
+  });
 
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
 
-  // TODO: Remove the console on production.
+  // TODO: Remove the console in production.
   // eslint-disable-next-line
   if (true /* process.env.NODE_ENV === 'development' */) {
     mainWindow.webContents.once('dom-ready', () => {
@@ -55,6 +60,8 @@ function createMain() {
 }
 
 app.on('ready', createMain);
+app.on('ready', startKeyboardEvent);
+app.on('wondow-all-closed', stopKeyboardEvent);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
