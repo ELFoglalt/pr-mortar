@@ -3,8 +3,6 @@
 </template>
 
 <script>
-import iohook from 'iohook';
-
 export default {
   props: {
     enabled: {
@@ -19,28 +17,15 @@ export default {
     };
   },
   watch: {
-    enabled(newVal) {
-      if (!newVal) {
-        iohook.stop();
-      }
-    },
+    enabled(newVal) {},
   },
   created() {
-    iohook.on('keydown', this.handleKeyEvent);
-
-    iohook.start();
-    iohook.stop();
-    // iohook.registerShortcut([56], this.handleKeyEvent);
-    // iohook.on('keydown', this.handleKeyDownEvent);
-    // iohook.on('keyup', this.handleKeyUpEvent);
-    iohook.start();
+    console.log(this.$store);
   },
-  beforeDestroy() {
-    iohook.stop();
-  },
+  beforeDestroy() {},
   methods: {
     doNothing() {
-      console.log('nope');
+      console.log('nope'); // eslint-disable-line
     },
     handleKeyEvent(info) {
       const { keycode, rawcode } = info;

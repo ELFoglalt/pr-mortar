@@ -58,16 +58,15 @@ const mutations = {
 };
 
 export const mutationTypes = {
-  UNLOAD_MAP: M_UNLOAD_MAP,
-  ADD_EVENT: M_ADD_EVENT,
-  CLEAR_EVENT_HISTORY: M_CLEAR_EVENT_HISTORY,
-  UNDO_EVENT: M_UNDO_EVENT,
-  REDO_EVENT: M_REDO_EVENT,
+  M_UNLOAD_MAP,
+  M_ADD_EVENT,
+  M_CLEAR_EVENT_HISTORY,
+  M_UNDO_EVENT,
+  M_REDO_EVENT,
 };
 
-export const actionTypes = {};
-
 export default {
+  namespace: '',
   state,
   getters,
   mutations,
