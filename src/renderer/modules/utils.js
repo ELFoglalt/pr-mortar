@@ -24,5 +24,5 @@ export default {
   mergeRegGroup,
   clone,
   normalizeVector,
-  directionFromVectors,
+  directionFromPoints,
 };

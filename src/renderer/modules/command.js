@@ -1,6 +1,6 @@
 import { Vector } from 'vector2d';
 
-import { clone, directionFromVectors } from './utils';
+import { directionFromVectors } from './utils';
 import parseMapPoint from './map-point';
 import parseMapDistance from './map-distance';
 
@@ -71,9 +71,10 @@ function parseCommand(str) {
   return result;
 }
 
-// This could use some re-thingking...
+// This 'one-function-does-all' solution is quick and dirty. If new commands
+// ever get added, this should be refactored big time.
 function applyCommand(state, command, prMap) {
-  const newState = clone(state);
+  const newState = Object.assign({}, state);
   const { type, parameter } = command;
 
   if (command.unknownStr) {
