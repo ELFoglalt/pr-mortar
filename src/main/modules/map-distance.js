@@ -49,7 +49,19 @@ function isCardinal(direction) {
   return !isCardinal(direction);
 } */
 
-export default function Distance(str) {
+export default function parseMapDistance(str) {
+  if (str === '' || str === '0') {
+    return {
+      magnitude: 0,
+      unit: unitMeter,
+      direction: 0,
+      // eslint-disable-next-line no-unused-vars
+      toMapVector(scale, refDirection) {
+        return new Vector(0, 0);
+      },
+    };
+  }
+
   const match = distanceRegExp.exec(str);
 
   if (!match) return null;
@@ -62,7 +74,7 @@ export default function Distance(str) {
     magnitude,
     unit,
     direction,
-    toHMU(scale, refDirection) {
+    toMapVector(scale, refDirection) {
       const scaledMagnitude = unit === unitMeter ? magnitude / scale : magnitude * subKeySizeHMU;
       const absoluteDirection = isCardinal(direction)
         ? cardinalVectors(direction).clone()

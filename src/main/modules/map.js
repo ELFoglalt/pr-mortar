@@ -122,7 +122,7 @@ async function loadUnzippedMap(folder) {
 
   convertToMetersInPlace(heightData, metaData);
 
-  return { heightData, ...metaData };
+  return { heightData, metaData };
 }
 
 export default {

@@ -44,8 +44,7 @@ function subKeyesToGridPoint(keyPads) {
   return gridPoint;
 }
 
-function gridPointToHMU(gridPoint) {
-  const scaledPoint = gridPoint.clone().mulS(gridSizeHMU);
+function gridPointToMapVector(gridPoint) {
   const offset = -subKeySizeHMU * 2;
   return gridPoint
     .clone()
@@ -53,7 +52,7 @@ function gridPointToHMU(gridPoint) {
     .add(new Vector(offset, offset));
 }
 
-export default function MapPoint(str) {
+export default function parseMapPoint(str) {
   const match = pointRegExp.exec(str);
 
   if (!match) return null;
@@ -68,8 +67,8 @@ export default function MapPoint(str) {
     str,
     gridPoint,
     gridSubKeyes,
-    toHMU() {
-      return gridPoint.clone().add(subKeyesToGridPoint(gridSubKeyes));
+    toMapVector() {
+      return gridPointToMapVector(gridPoint.clone().add(subKeyesToGridPoint(gridSubKeyes)));
     },
   };
 }

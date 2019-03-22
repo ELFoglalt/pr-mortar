@@ -1,13 +1,15 @@
 Core:
     ✔ Load pr map @started(19-03-19 14:49) @done(19-03-20 04:15) @lasted(13h26m39s)
-    ☐ Command input parser @started(19-03-20 17:23)
+    ✔ Command input parser @started(19-03-20 17:23) @done(19-03-22 03:46) @lasted(1d10h23m21s)
         ✔ Command structure @done(19-03-20 20:16)
-        ☐ Constant structure
-            ☐ Point
-            ☐ Distance
-        ☐ Parser utility/sm?
-    ☐ Build keyboard blocking version of iohook
+        ✔ Parameters @done(19-03-21 17:39)
+            ✔ Point @done(19-03-21 17:38)
+            ✔ Distance @done(19-03-21 17:38)
+        ✔ Parser utility/sm? @done(19-03-22 03:46)
+    ☐ Vue map, state, and command handling
     ☐ UI for firing solution output
+    ☐ Build keyboard blocking version of iohook
+
 
 Exploration:
     ✔ Test in-game mouse events detection @done(19-03-17 16:43)
@@ -24,6 +26,7 @@ Exploration:
 
 Enhancements:
     ☐ Persist window position
+    ☐ Allow mixed prarameters (e.g. 'E14k2+50mE')
     ☐ Figure out product name vs package name clash
     ☐ Detect PR installation location using winreg
 
