@@ -1,36 +1,38 @@
 Core:
-    ✔ Load pr map @started(19-03-19 14:49) @done(19-03-20 04:15) @lasted(13h26m39s)
-    ✔ Command input parser @started(19-03-20 17:23) @done(19-03-22 03:46) @lasted(1d10h23m21s)
-        ✔ Command structure @done(19-03-20 20:16)
-        ✔ Parameters @done(19-03-21 17:39)
-            ✔ Point @done(19-03-21 17:38)
-            ✔ Distance @done(19-03-21 17:38)
-        ✔ Parser utility/sm? @done(19-03-22 03:46)
-    ✔ Map unzipping @done(19-03-23 15:21)
-    ☐ Vue map, state, and command handling
-      > Half done
-    ☐ UI for firing solution output
-    ☐ Build keyboard blocking version of iohook
+  ✔ Load pr map @started(19-03-19 14:49) @done(19-03-20 04:15) @lasted(13h26m39s)
+  ✔ Command input parser @started(19-03-20 17:23) @done(19-03-22 03:46) @lasted(1d10h23m21s)
+    ✔ Command structure @done(19-03-20 20:16)
+    ✔ Parameters @done(19-03-21 17:39)
+        ✔ Point @done(19-03-21 17:38)
+        ✔ Distance @done(19-03-21 17:38)
+    ✔ Parser utility/sm? @done(19-03-22 03:46)
+  ✔ Map unzipping @done(19-03-23 15:21)
+  ✔ Vue map, state, and command handling gi@done(19-03-24 00:28)
+    > Half done
+  ☐ UI for firing solution output
+  ☐ Build keyboard blocking version of iohook
 
 
 Exploration:
-    ✔ Test in-game mouse events detection @done(19-03-17 16:43)
-        > Works in-game when launched as admin
-    ✔ Test multi-monitor mouse placement options @done(19-03-19 04:38)
-    ✘ Test robotjs mouse positioning @cancelled(19-03-19 14:31)
-        > In-game mouse is not moving consistently enough
-        > Robotjs as mouse position input is *not reliable*.
-    ✔ Test input based on keystrokes @done(19-03-19 14:27)
-        > Electron global shortucts *do not work*.
-        > Use iohook
-    ☐ Test text to speech (say.js?)
-    ☐ Explore image/printscreen based detection
+  ✔ Test in-game mouse events detection @done(19-03-17 16:43)
+      > Works in-game when launched as admin
+  ✔ Test multi-monitor mouse placement options @done(19-03-19 04:38)
+  ✘ Test robotjs mouse positioning @cancelled(19-03-19 14:31)
+      > In-game mouse is not moving consistently enough
+      > Robotjs as mouse position input is *not reliable*.
+  ✔ Test input based on keystrokes @done(19-03-19 14:27)
+      > Electron global shortucts *do not work*.
+      > Use iohook
+  ☐ Test text to speech (say.js?)
+  ☐ Explore image/printscreen based detection
 
 Enhancements:
-    ☐ Proper map open dialog
-    ☐ Persist window position
-    ☐ Allow mixed prarameters (e.g. 'E14k2+50mE')
-    ☐ Figure out product name vs package name clash
-    ☐ Detect PR installation location using winreg
+  ☐ Move keypress event handling purely to renderer thread.
+  ✔ Proper map open dialog. @done(19-03-24 00:27)
+  ☐ Persist window position
+  ☐ Allow mixed prarameters (e.g. 'E14k2+50mE')
+  ☐ Refactor commands to provide meaningful error and success messages.
+  ☐ Figure out product name vs package name clash
+  ☐ Detect PR installation location using winreg
 
 Chores:
