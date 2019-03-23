@@ -11,7 +11,7 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   modules,
-  plugins: [createPersistedState(), createSharedMutations()],
+  plugins: [/* createPersistedState(), */ createSharedMutations()], // eslint-disable-line
   strict: process.env.NODE_ENV !== 'production',
 });
 

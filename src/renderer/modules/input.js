@@ -83,4 +83,4 @@ export const rawCharToChar = (raw) => {
 
 export const activatorRawChar = 3675; // LeftWin
 
-export default { rawCharToChar, activatorRawChar };
+// export default { rawCharToChar, activatorRawChar };
