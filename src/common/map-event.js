@@ -1,8 +1,8 @@
 import { Vector } from 'vector2d';
 
 export class MapState {
-  constructor(firingPositon = null, targetPosition = null, targetOffset = new Vector(0, 0)) {
-    this.firingPositon = firingPositon;
+  constructor(firingPosition = null, targetPosition = null, targetOffset = new Vector(0, 0)) {
+    this.firingPosition = firingPosition;
     this.targetPosition = targetPosition;
     this.targetOffset = targetOffset;
   }

@@ -40,5 +40,6 @@ module.exports = {
     'padded-blocks': 1,
     'no-multiple-empty-lines': 1,
     'no-unused-vars': 1,
+    'no-empty': 1,
   },
 };

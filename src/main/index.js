@@ -1,5 +1,6 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import { startKeyboardEvent, stopKeyboardEvent } from './modules/keyboard-hook';
+import importMapWithDialog from './modules/map-import';
 
 /**
  * Set `__static` path to static files in production
@@ -26,18 +27,28 @@ const winURL =
     ? 'http://localhost:9080'
     : `file://${__dirname}/index.html`;
 
+const browserWindowDebugOptions = {
+  x: -1000,
+  y: 100,
+  width: 1000,
+  height: 800,
+};
+
+const browserWindowDefaultOptions = {
+  width: 350,
+  height: 200,
+  show: false,
+};
+
 function createMain() {
   /**
    * Initial window options
    */
-
-  mainWindow = new BrowserWindow({
-    x: -1000,
-    y: 100,
-    width: 1000,
-    height: 800,
-    show: false,
-  });
+  mainWindow = new BrowserWindow(Object.assign(
+    {},
+    browserWindowDefaultOptions,
+    process.env.NODE_ENV === 'development' ? browserWindowDebugOptions : {},
+  ));
 
   mainWindow.setMenu(null);
   mainWindow.loadURL(winURL);
@@ -50,9 +61,12 @@ function createMain() {
     mainWindow = null;
   });
 
-  // TODO: Remove the console in production.
-  // eslint-disable-next-line
-  if (true /* process.env.NODE_ENV === 'development' */) {
+  ipcMain.on('prompt-map-dialog', (event) => {
+    importMapWithDialog();
+    event.returnValue = true;
+  });
+
+  if (process.env.NODE_ENV === 'development') {
     mainWindow.webContents.once('dom-ready', () => {
       mainWindow.webContents.openDevTools();
     });
@@ -61,7 +75,7 @@ function createMain() {
 
 app.on('ready', createMain);
 app.on('ready', startKeyboardEvent);
-app.on('wondow-all-closed', stopKeyboardEvent);
+app.on('window-all-closed', stopKeyboardEvent);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

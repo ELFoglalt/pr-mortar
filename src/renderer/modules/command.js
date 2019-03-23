@@ -1,36 +1,38 @@
 import { Vector } from 'vector2d';
 
-import { directionFromVectors } from './utils';
+import { directionFromPoints } from './utils';
 import parseMapPoint from './map-point';
 import parseMapDistance from './map-distance';
 
 const paramTypePoint = 'point';
 const paramTypeDistance = 'distance';
 
-const commandTypeSTP = {
-  aliases: ['sfp', 'fp', ','],
+// TODO: Use RegExp for alias
+const commandTypeSFP = {
+  aliases: ['SFP', 'FP', '*'],
   description: 'Set Firing Position',
   paramType: paramTypePoint,
 };
-const commandTypeSFP = {
-  aliases: ['sfp', 'fp', '+'],
+const commandTypeSTP = {
+  aliases: ['STP', 'TP', ','],
   description: 'Set Target Position',
   paramType: paramTypePoint,
 };
 const commandTypeSTO = {
-  aliases: ['sto', 'to', '/'],
+  aliases: ['STO', 'TO', '-'],
   description: 'Set Target Offset',
   paramType: paramTypeDistance,
 };
 const commandTypeATO = {
-  aliases: ['ato', 'a', '*'],
+  aliases: ['ATO', 'A', '+'],
   description: 'Adjust Target Offset',
   paramType: paramTypeDistance,
 };
 const allCommandTypes = [commandTypeSTP, commandTypeSFP, commandTypeSTO, commandTypeATO];
 
 function matchCommandToString(str, cmd) {
-  return cmd.aliases.find(alias => str.startsWith(alias));
+  const stru = str.toUpperCase();
+  return cmd.aliases.find(alias => stru.startsWith(alias));
 }
 
 function identifyCommandType(str) {
@@ -42,7 +44,7 @@ function identifyCommandType(str) {
   return { commandType: allCommandTypes[idx], paramStr: str.replace(matchedAliases[idx], '') };
 }
 
-function parseCommand(str) {
+export function parseCommand(str) {
   const result = {
     inputStr: str,
     commandType: null,
@@ -73,26 +75,29 @@ function parseCommand(str) {
 
 // This 'one-function-does-all' solution is quick and dirty. If new commands
 // ever get added, this should be refactored big time.
-function applyCommand(state, command, prMap) {
+export function applyCommand(state, command, prMap) {
   const newState = Object.assign({}, state);
-  const { type, parameter } = command;
+  const { commandType, parameter } = command;
 
   if (command.unknownStr) {
-    return newState;
+    return null;
   }
 
-  if (type === commandTypeSTP) {
-    newState.firingPosition = parameter.toMapVector();
-  } else if (type === commandTypeSFP) {
+  if (commandType === commandTypeSTP) {
     newState.targetPosition = parameter.toMapVector();
+  } else if (commandType === commandTypeSFP) {
+    newState.firingPosition = parameter.toMapVector();
     newState.targetOffset = new Vector(0, 0);
   } else {
     const { firingPosition, targetPosition, toMapVector } = parameter;
-    const refDirection = directionFromVectors(firingPosition, targetPosition);
 
-    if (type === commandTypeSTO) {
+    if (!firingPosition || !targetPosition) return null;
+
+    const refDirection = directionFromPoints(firingPosition, targetPosition);
+
+    if (commandType === commandTypeSTO) {
       newState.targetOffset = toMapVector(prMap.metaData.scale[0], refDirection);
-    } else if (type === commandTypeATO && newState.targetOffset !== null) {
+    } else if (commandType === commandTypeATO && newState.targetOffset !== null) {
       newState.targetOffset = newState.targetOffset
         .clone()
         .add(toMapVector(prMap.metaData.scale[0], refDirection));

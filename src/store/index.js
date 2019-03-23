@@ -4,14 +4,14 @@ import Vuex from 'vuex';
 import { createPersistedState, createSharedMutations } from 'vuex-electron'; // eslint-disable-line
 
 import keyboardInput from './modules/keyboardInput';
-import mapState from './modules/mapState';
+import core from './modules/core';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     keyboardInput,
-    mapState,
+    core,
   },
   plugins: [/* createPersistedState(), */ createSharedMutations()], // eslint-disable-line
   strict: process.env.NODE_ENV !== 'production',

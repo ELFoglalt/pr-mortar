@@ -14,12 +14,11 @@ const getters = {
   activeEvent() {
     return state.mapEventHistory[state.activeEventIdx];
   },
-  firingSolution() {},
 };
 
 const mutations = {
   mLoadMap(state, payload) {
-    state.prMap = payload.prMap;
+    state.prMap = payload.loadedMap;
   },
   mUnloadMap(state) {
     state.prMap = null;
@@ -50,9 +49,29 @@ const mutations = {
   },
 };
 
+const actions = {
+  async aLoadMap({ commit }, payload) {
+    commit('mLoadMap', payload);
+    commit('mClearEventHistory');
+  },
+  aAddEvent({ commit }, payload) {
+    commit('mAddEvent', payload);
+  },
+  aClearEventHistory({ commit }) {
+    commit('mClearEventHistory');
+  },
+  aUndoEvent({ commit }) {
+    commit('mUndoEvent');
+  },
+  aRedoEvent({ commit }) {
+    commit('mRedoEvent');
+  },
+};
+
 export default {
   namespaced: true,
   state,
   getters,
   mutations,
+  actions,
 };

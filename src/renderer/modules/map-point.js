@@ -64,7 +64,7 @@ export default function parseMapPoint(str) {
     .map(s => parseInt(s, 10));
 
   return {
-    str,
+    str: `${match[1]}${match[2]}${gridSubKeyes.length > 0 ? '/' : ''}${gridSubKeyes.join('/')}`,
     gridPoint,
     gridSubKeyes,
     toMapVector() {

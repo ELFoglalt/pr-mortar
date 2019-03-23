@@ -65,7 +65,12 @@ const numPadExtra = {
   109: '-',
   110: ',',
   111: '/',
-  3612: '_', // NumEnter mapped to underscore
+  13: '_', // NumEnter mapped to underscore
+};
+
+const arrows = {
+  37: '<',
+  39: '>',
 };
 
 const mapping = {
@@ -74,13 +79,15 @@ const mapping = {
   ...keyboardExtra,
   ...numPadDigits,
   ...numPadExtra,
+  ...arrows,
 };
 
-export const rawCharToChar = (raw) => {
-  const char = mapping(raw);
+export function rawCharToChar(raw) {
+  const char = mapping[raw];
   return char || '';
-};
+}
 
-export const activatorRawChar = 3675; // LeftWin
+export const activatorKeyCode = 56; // LeftAlt
+// export const activatorKeyCode = 3675; // LeftWin
 
 // export default { rawCharToChar, activatorRawChar };

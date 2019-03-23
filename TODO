@@ -6,6 +6,7 @@ Core:
             ✔ Point @done(19-03-21 17:38)
             ✔ Distance @done(19-03-21 17:38)
         ✔ Parser utility/sm? @done(19-03-22 03:46)
+    ✔ Map unzipping @done(19-03-23 15:21)
     ☐ Vue map, state, and command handling
       > Half done
     ☐ UI for firing solution output
@@ -26,10 +27,10 @@ Exploration:
     ☐ Explore image/printscreen based detection
 
 Enhancements:
+    ☐ Proper map open dialog
     ☐ Persist window position
     ☐ Allow mixed prarameters (e.g. 'E14k2+50mE')
     ☐ Figure out product name vs package name clash
     ☐ Detect PR installation location using winreg
 
-Chore:
-    ✔ Remove MapPage. We don't need pages. @done(19-03-19 04:39)
+Chores:

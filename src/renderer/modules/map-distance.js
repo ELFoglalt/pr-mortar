@@ -5,7 +5,7 @@ import { subKeySizeHMU } from './map-constants';
 const groupInt = '[0-9]+';
 const unitMeter = 'm';
 const unitKeyPad = '[\\/k]';
-const groupUnit = mergeRegGroup;
+const groupUnit = mergeRegGroup(unitMeter, unitKeyPad);
 const dirNorth = 'N';
 const dirSouth = 'S';
 const dirWest = 'W';
@@ -52,9 +52,10 @@ function isCardinal(direction) {
 export default function parseMapDistance(str) {
   if (str === '' || str === '0') {
     return {
+      str: '0m',
       magnitude: 0,
       unit: unitMeter,
-      direction: 0,
+      direction: '',
       // eslint-disable-next-line no-unused-vars
       toMapVector(scale, refDirection) {
         return new Vector(0, 0);
@@ -71,6 +72,7 @@ export default function parseMapDistance(str) {
   const direction = dirs[dirRegExps.findIndex(d => match[3].match(d))];
 
   return {
+    str: `${magnitude}${unit}${direction}`,
     magnitude,
     unit,
     direction,

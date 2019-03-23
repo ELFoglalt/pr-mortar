@@ -20,7 +20,7 @@ async function unzip(zipPath, outFolder, filePath) {
   });
 }
 
-async function isValidPRMap(folder) {
+export async function isValidPRMap(folder) {
   const serverZip = path.join(folder, 'server.zip');
   try {
     await promisify(fs.stat)(serverZip);
@@ -32,13 +32,13 @@ async function isValidPRMap(folder) {
   }
 
   const directory = await unzipper.Open.file(serverZip);
-  const hasHeightMap = directory.find(f => f.path === 'heightmapprimary.raw');
-  const hasMetaData = directory.find(f => f.path === 'heightdata.con');
+  const hasHeightMap = directory.files.find(f => f.path === 'heightmapprimary.raw');
+  const hasMetaData = directory.files.find(f => f.path === 'heightdata.con');
 
   return hasHeightMap && hasMetaData;
 }
 
-async function unzipPRMap(mapFolder, outFolder) {
+export async function unzipPRMap(mapFolder, outFolder) {
   if (!(await isValidPRMap(mapFolder))) {
     throw Error('Folder is not a valid PRBF2 map.');
   }
@@ -108,7 +108,7 @@ function convertToMetersInPlace(heightData, metaData) {
   maxseq(heightData, 0);
 }
 
-async function loadUnzippedMap(folder) {
+export async function loadUnzippedMap(folder) {
   let heightData;
   let metaData;
   try {

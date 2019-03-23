@@ -8,7 +8,7 @@
 /* eslint-disable */
 
 // Install `electron-debug` with `devtron`
-require('electron-debug')({ /* showDevTools: true */ }); // eslint-disable-line
+require('electron-debug')(/* { showDevTools: true } */); // eslint-disable-line
 
 // Install `vue-devtools`
 require('electron').app.on('ready', () => {
@@ -16,7 +16,7 @@ require('electron').app.on('ready', () => {
   installExtension
     .default(installExtension.VUEJS_DEVTOOLS)
     .then(() => {})
-    .catch(err => {
+    .catch((err) => {
       console.log('Unable to install `vue-devtools`: \n', err);
     });
 });
