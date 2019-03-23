@@ -1,9 +1,9 @@
 import iohook from 'iohook';
-import { store, storeTypes } from '../../store';
+import store from '../../store';
 
 export function broadcastKeyboardEvent(event) {
   // console.log(event);
-  store.dispatch(storeTypes.actionTypes.A_PUSH_KEYBOARD_EVENT, { event });
+  store.dispatch('keyboardInput/aPushKeyboardEvent', { event });
 }
 
 export function startKeyboardEvent() {

@@ -7,6 +7,7 @@ Core:
             ✔ Distance @done(19-03-21 17:38)
         ✔ Parser utility/sm? @done(19-03-22 03:46)
     ☐ Vue map, state, and command handling
+      > Half done
     ☐ UI for firing solution output
     ☐ Build keyboard blocking version of iohook
 

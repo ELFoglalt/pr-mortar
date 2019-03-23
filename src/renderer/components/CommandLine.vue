@@ -23,11 +23,12 @@ export default {
       return this.isEnabled && this.isActive;
     },
     keyboardEvent() {
-      return this.$store.state.KeyboardInput.keyboardEvent;
+      return this.$store;
     },
   },
   watch: {
     keyboardEvent(event) {
+      // TODO Continue here :)
       console.log(event);
     },
   },
