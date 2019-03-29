@@ -1,6 +1,6 @@
 import { Vector } from 'vector2d';
 
-import { directionFromPoints } from './utils';
+import { lookAtDirection } from './utils';
 import parseMapPoint from './map-point';
 import parseMapDistance from './map-distance';
 
@@ -84,23 +84,27 @@ export function applyCommand(state, command, prMap) {
   }
 
   if (commandType === commandTypeSTP) {
-    newState.targetPosition = parameter.toMapVector();
+    newState.targetPosition = parameter;
+    newState.targetOffset = { x: 0, y: 0 };
   } else if (commandType === commandTypeSFP) {
-    newState.firingPosition = parameter.toMapVector();
-    newState.targetOffset = new Vector(0, 0);
+    newState.firingPosition = parameter;
   } else {
-    const { firingPosition, targetPosition, toMapVector } = parameter;
+    const { firingPosition, targetPosition } = newState;
+    const { toMapVector } = parameter;
 
     if (!firingPosition || !targetPosition) return null;
 
-    const refDirection = directionFromPoints(firingPosition, targetPosition);
+    const refDirection = lookAtDirection(
+      new Vector(firingPosition.mapVector.x, firingPosition.mapVector.y),
+      new Vector(targetPosition.mapVector.x, targetPosition.mapVector.y),
+    );
 
     if (commandType === commandTypeSTO) {
-      newState.targetOffset = toMapVector(prMap.metaData.scale[0], refDirection);
+      newState.targetOffset = toMapVector(prMap.metaData.scale[0], refDirection).toObject();
     } else if (commandType === commandTypeATO && newState.targetOffset !== null) {
-      newState.targetOffset = newState.targetOffset
-        .clone()
-        .add(toMapVector(prMap.metaData.scale[0], refDirection));
+      newState.targetOffset = new Vector(newState.targetOffset.x, newState.targetOffset.y)
+        .add(toMapVector(prMap.metaData.scale[0], refDirection))
+        .toObject();
     }
   }
 

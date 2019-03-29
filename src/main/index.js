@@ -36,7 +36,7 @@ const browserWindowDebugOptions = {
 
 const browserWindowDefaultOptions = {
   width: 350,
-  height: 200,
+  height: 370,
   show: false,
 };
 

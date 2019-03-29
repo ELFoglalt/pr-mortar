@@ -34,12 +34,6 @@ export default async function importMapWithDialog(window = undefined) {
     dialog.showErrorBox('Failed to load map', error.message);
   }
 
-  try {
-    lastPath = path.dirname(sourceDirectory);
-  } catch (error) {
-    lastPath = undefined;
-  }
-
   let loadedMap;
   try {
     loadedMap = await loadUnzippedMap(targetDirectory);
@@ -49,6 +43,12 @@ export default async function importMapWithDialog(window = undefined) {
   }
 
   loadedMap.mapName = mapName;
+
+  try {
+    lastPath = path.dirname(sourceDirectory);
+  } catch (error) {
+    lastPath = undefined;
+  }
 
   store.dispatch('core/aLoadMap', { loadedMap });
 }

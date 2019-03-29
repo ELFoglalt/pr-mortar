@@ -55,16 +55,14 @@ export async function unzipPRMap(mapFolder, outFolder) {
   }
 }
 
-const readFilePromise = promisify(fs.readFile);
-
 async function loadMetaData(filePath) {
-  const configStr = (await readFilePromise(filePath)).toString();
+  const configStr = (await promisify(fs.readFile)(filePath)).toString();
 
   const scaleRegExp = /Heightmap 0 0$[\s\S]*?^heightmap\.setScale ([\d.]*)\/([\d.]*)\/([\d.]*)$/gm;
   const seawaterlevelRegExp = /^heightmapcluster\.setSeaWaterLevel (-?[\d.]*)$/gm;
 
   const scaleResults = scaleRegExp.exec(configStr);
-  if (scaleResults.length < 4) {
+  if (!scaleResults || scaleResults.length < 4) {
     throw Error('Invalid config file.');
   }
 
@@ -91,13 +89,13 @@ function toArrayBuffer(buf) {
 
 // heieghtData.get(x, y): x selects column (left->right), y selects row (top->bottom) on map;
 async function loadHeightData(path, shape = [1025, 1025]) {
-  const buffer = toArrayBuffer(await readFilePromise(path));
+  const buffer = toArrayBuffer(await promisify(fs.readFile)(path));
 
   const heightDataAsUInt16 = ndarray(new Uint16Array(buffer));
   const heightDataUnpacked = unpack(heightDataAsUInt16);
   const heightDataAsNumber = ndarray(heightDataUnpacked, shape)
     .step(-1, 1)
-    .transpose();
+    .transpose(1, 0);
 
   return heightDataAsNumber;
 }

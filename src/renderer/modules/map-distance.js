@@ -37,12 +37,12 @@ const cardinalVectors = {
 const relativeAngles = {
   [dirFurther]: 0,
   [dirCloser]: Math.PI,
-  [dirLeft]: 0.5 * Math.PI,
-  [dirRight]: 1.5 * Math.PI,
+  [dirLeft]: 1.5 * Math.PI,
+  [dirRight]: 0.5 * Math.PI,
 };
 
 function isCardinal(direction) {
-  return [dirNorth, dirSouth, dirWest, dirEast].findIndex(direction) !== -1;
+  return cardinalVectors[direction] !== undefined;
 }
 
 /* function isRelative(direction) {
@@ -79,10 +79,13 @@ export default function parseMapDistance(str) {
     toMapVector(scale, refDirection) {
       const scaledMagnitude = unit === unitMeter ? magnitude / scale : magnitude * subKeySizeHMU;
       const absoluteDirection = isCardinal(direction)
-        ? cardinalVectors(direction).clone()
-        : refDirection.clone().rotate(relativeAngles(direction));
+        ? cardinalVectors[direction].clone()
+        : refDirection.clone().rotate(relativeAngles[direction]);
 
-      return absoluteDirection.clone().mulS(scaledMagnitude);
+      const { x, y } = absoluteDirection.toObject();
+      const absDirRounded = new Vector(Math.round(x), Math.round(y));
+
+      return absDirRounded.mulS(scaledMagnitude);
     },
   };
 }

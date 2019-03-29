@@ -35,11 +35,13 @@ module.exports = {
         allowSamePrecedence: true,
       },
     ],
+    // 'no-extra-parens': 0,
     // warnings over errors
     'no-useless-constructor': 1,
     'padded-blocks': 1,
     'no-multiple-empty-lines': 1,
     'no-unused-vars': 1,
     'no-empty': 1,
+    'spaced-comment': 1,
   },
 };

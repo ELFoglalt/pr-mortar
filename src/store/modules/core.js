@@ -1,4 +1,5 @@
 import { MapEvent } from '../../common/map-event';
+import { backwardsSolve } from '../../renderer/modules/firing-solution';
 
 function createEmptyHistory() {
   return [new MapEvent()];
@@ -8,11 +9,24 @@ const state = {
   prMap: null,
   mapEventHistory: createEmptyHistory(),
   activeEventIdx: 0,
+  firingSolution: null,
 };
 
 const getters = {
-  activeEvent() {
+  activeEvent(state) {
     return state.mapEventHistory[state.activeEventIdx];
+  },
+  firingSolution(state, getters) {
+    const { firingPosition, targetPosition, targetOffset } = getters.activeEvent.state;
+    if (firingPosition && targetPosition) {
+      return backwardsSolve(
+        state.prMap,
+        firingPosition.mapVector,
+        targetPosition.mapVector,
+        targetOffset,
+      );
+    }
+    return backwardsSolve(state.prMap, null, null, targetOffset);
   },
 };
 
@@ -31,7 +45,7 @@ const mutations = {
       state.mapEventHistory = state.mapEventHistory.slice(state.activeEventIdx);
       state.activeEventIdx = 0;
     }
-    state.mapEventHistory.unshift(payload.command);
+    state.mapEventHistory.unshift(payload);
   },
   mClearEventHistory(state) {
     state.mapEventHistory = createEmptyHistory();

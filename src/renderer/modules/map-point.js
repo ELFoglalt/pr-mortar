@@ -63,12 +63,12 @@ export default function parseMapPoint(str) {
     .filter(Boolean)
     .map(s => parseInt(s, 10));
 
+  const gridPointWithSubKeyes = gridPoint.clone().add(subKeyesToGridPoint(gridSubKeyes));
+
   return {
     str: `${match[1]}${match[2]}${gridSubKeyes.length > 0 ? '/' : ''}${gridSubKeyes.join('/')}`,
-    gridPoint,
+    gridPoint: gridPoint.toObject(),
     gridSubKeyes,
-    toMapVector() {
-      return gridPointToMapVector(gridPoint.clone().add(subKeyesToGridPoint(gridSubKeyes)));
-    },
+    mapVector: gridPointToMapVector(gridPointWithSubKeyes).toObject(),
   };
 }

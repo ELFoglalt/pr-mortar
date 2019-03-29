@@ -70,6 +70,9 @@ export default {
 
       if (!this.prMap) {
         this.commandBuffer = '';
+        this.messageType = 'warning';
+        this.messageText = 'No map loaded.';
+        return;
       }
 
       if (this.commandBuffer === '') {
@@ -106,7 +109,7 @@ export default {
         command.commandType.description
       } ${command.parameter.str}'`;
 
-      this.aAddEvent({ command, newState });
+      this.aAddEvent({ command, state: newState });
     },
     ...mapActions('core', ['aAddEvent']),
   },

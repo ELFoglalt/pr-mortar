@@ -1,7 +1,5 @@
-import { Vector } from 'vector2d';
-
 export class MapState {
-  constructor(firingPosition = null, targetPosition = null, targetOffset = new Vector(0, 0)) {
+  constructor(firingPosition = null, targetPosition = null, targetOffset = { x: 0, y: 0 }) {
     this.firingPosition = firingPosition;
     this.targetPosition = targetPosition;
     this.targetOffset = targetOffset;
