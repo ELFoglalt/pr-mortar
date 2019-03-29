@@ -61,7 +61,7 @@ async function loadMetaData(filePath) {
   const configStr = (await readFilePromise(filePath)).toString();
 
   const scaleRegExp = /Heightmap 0 0$[\s\S]*?^heightmap\.setScale ([\d.]*)\/([\d.]*)\/([\d.]*)$/gm;
-  const seawaterlevelRegExp = /^heightmapcluster\.setSeaWaterLevel ([\d.]*)$/gm;
+  const seawaterlevelRegExp = /^heightmapcluster\.setSeaWaterLevel (-?[\d.]*)$/gm;
 
   const scaleResults = scaleRegExp.exec(configStr);
   if (scaleResults.length < 4) {
