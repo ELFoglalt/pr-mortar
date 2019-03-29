@@ -8,7 +8,7 @@ Core:
     ✔ Parser utility/sm? @done(19-03-22 03:46)
   ✔ Map unzipping @done(19-03-23 15:21)
   ✔ Vue map, state, and command handling gi@done(19-03-24 00:28)
-  ☐ UI for firing solution output
+  ✔ UI for firing solution output @done(19-03-29 21:13)
   ☐ Build keyboard blocking version of iohook
 
 
@@ -26,13 +26,14 @@ Exploration:
   ☐ Explore image/printscreen based detection
 
 Enhancements:
-  ☐ Move keypress event handling purely to renderer thread.
+  ☐ Move keypress event handling purely to renderer thread
   ✔ Proper map open dialog. @done(19-03-24 00:27)
+  ☐ Nicer UI for firing computer
   ☐ Persist window position
   ☐ Allow mixed prarameters (e.g. 'E14k2+50mE')
-  ☐ Refactor commands to provide meaningful error and success messages.
+  ☐ Refactor commands to provide meaningful error and success messages
   ☐ Figure out product name vs package name clash
   ☐ Detect PR installation location using winreg
-  ☐ Figure out how to read the minimap map .dds files (use libsquish?) (http://www.buckarooshangar.com/flightgear/tut_dds.html).
+  ☐ Figure out how to read the minimap map .dds files (use libsquish?) (http://www.buckarooshangar.com/flightgear/tut_dds.html)
 
 Chores:
