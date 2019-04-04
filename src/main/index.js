@@ -1,5 +1,4 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
-import { startKeyboardEvent, stopKeyboardEvent } from './modules/keyboard-hook';
 import importMapWithDialog from './modules/map-import';
 
 /**
@@ -74,8 +73,6 @@ function createMain() {
 }
 
 app.on('ready', createMain);
-app.on('ready', startKeyboardEvent);
-app.on('window-all-closed', stopKeyboardEvent);
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

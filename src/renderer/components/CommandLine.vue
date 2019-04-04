@@ -8,6 +8,7 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex';
+import iohook from 'iohook';
 import { activatorKeyCode, rawCharToChar } from '../modules/input.js';
 import { parseCommand, applyCommand } from '../modules/command.js';
 
@@ -41,12 +42,18 @@ export default {
       if (this.messageType === 'info') return 'is-success';
       return '';
     },
-    ...mapState('keyboardInput', ['keyboardEvent']),
     ...mapState('core', ['prMap']),
     ...mapGetters('core', ['activeEvent']),
   },
-  watch: {
-    keyboardEvent(event) {
+  mounted() {
+    this.startListeningForKeyboardEvents();
+  },
+  beforeDestroy() {
+    this.stopListeningForKeyboardEvents();
+  },
+  methods: {
+    handleKeyboardEvent(event) {
+      console.log(event);
       if (event.type === 'keydown' && event.keycode === activatorKeyCode) {
         this.activate();
       }
@@ -60,8 +67,15 @@ export default {
         }
       }
     },
-  },
-  methods: {
+    startListeningForKeyboardEvents() {
+      iohook.addListener('keydown', this.handleKeyboardEvent);
+      iohook.addListener('keyup', this.handleKeyboardEvent);
+      iohook.start();
+    },
+    stopListeningForKeyboardEvents() {
+      iohook.stop();
+      iohook.removeAllListeners();
+    },
     activate() {
       this.isActive = true;
     },
