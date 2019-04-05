@@ -1,7 +1,10 @@
 <template>
   <div id='app' class='container'>
-    <MapInfo/>
-    <!-- <Options/> -->
+    <div id='header'></div>
+    <span id='top-bar'>
+      <MapInfo/>
+      <ExitButton/>
+    </span>
     <FiringComputer/>
     <CommandLine/>
   </div>
@@ -9,7 +12,7 @@
 
 <script>
 import MapInfo from '@/components/MapInfo';
-import Options from '@/components/Options';
+import ExitButton from '@/components/ExitButton';
 import FiringComputer from '@/components/FiringComputer';
 import CommandLine from '@/components/CommandLine';
 
@@ -17,7 +20,7 @@ export default {
   name: 'pr-mortar',
   components: {
     MapInfo,
-    Options,
+    ExitButton,
     FiringComputer,
     CommandLine,
   },
@@ -25,20 +28,16 @@ export default {
 </script>
 
 <style lang="scss">
+::-webkit-scrollbar {
+  display: none;
+}
+
 body {
   height: 100vh;
   margin: 0;
-  -ms-overflow-style: scrollbar;
-  -webkit-app-region: drag;
-}
-
-input[type='submit'],
-input[type='reset'],
-input[type='button'],
-input[type='text'],
-button,
-textarea {
-  -webkit-app-region: no-drag;
+  -ms-overflow-style: none;
+  user-select: none;
+  cursor: default;
 }
 
 #app {
@@ -47,7 +46,24 @@ textarea {
   padding: 24px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow-x: scroll;
+}
+
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  -webkit-app-region: drag;
+}
+
+#top-bar {
+  display: flex;
+  flex-direction: row;
+  :last-child {
+    margin-left: 10px;
+  }
 }
 
 .icon {

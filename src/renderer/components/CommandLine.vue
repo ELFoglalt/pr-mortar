@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-field grouped>
-      <b-switch v-model='isEnabled'/>
+      <b-switch :title='enableSwitchTooltip' @focus.native='clearFocus' v-model='isEnabled'/>
       <b-field :type='inputFlavour' expanded>
         <b-input v-model='displayMessage' disabled></b-input>
       </b-field>
@@ -21,6 +21,7 @@ import {
   rawCharToChar,
 } from '../modules/input.js';
 import { parseCommand, applyCommand } from '../modules/command.js';
+import { clearFocusMixin } from '../mixins/clearFocusMixin';
 
 export default {
   data() {
@@ -32,6 +33,7 @@ export default {
       messageText: '',
     };
   },
+  mixins: [clearFocusMixin],
   computed: {
     isRecording() {
       return this.isEnabled && this.isActive;
@@ -59,6 +61,9 @@ export default {
       if (this.messageType === 'info') return 'is-success';
       return '';
     },
+    enableSwitchTooltip() {
+      return `${this.isEnabled ? 'Disable' : 'Enable'} command input`;
+    },
     ...mapState('core', ['prMap']),
     ...mapGetters('core', ['activeEvent']),
   },
@@ -66,6 +71,7 @@ export default {
     isEnabled: {
       immediate: true,
       handler(newEnabled) {
+        this.clearFocus();
         if (newEnabled) {
           this.startListeingForKeyboardEvents();
         } else {
@@ -187,5 +193,6 @@ export default {
 #message {
   width: 100%;
   margin-top: -10px;
+  min-height: 24px;
 }
 </style>

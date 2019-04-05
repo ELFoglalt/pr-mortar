@@ -33,7 +33,7 @@
                   </div>
                 </div>
                 <div class='level-right'>
-                  <b-checkbox-button v-model='muteElevationAudio'>
+                  <b-checkbox-button :title='elevationMuteTooltip' v-model='muteElevationAudio'>
                     <v-icon v-if='muteElevationAudio' name='volume-x'></v-icon>
                     <v-icon v-else name='volume-2'></v-icon>
                   </b-checkbox-button>
@@ -51,7 +51,11 @@
                   </div>
                 </div>
                 <div class='level-right'>
-                  <b-checkbox-button v-model='muteDeflectionAudio'>
+                  <b-checkbox-button
+                    :title='deflectionMuteTooltip'
+                    @focus.native='clearFocus'
+                    v-model='muteDeflectionAudio'
+                  >
                     <v-icon v-if='muteDeflectionAudio' name='volume-x'></v-icon>
                     <v-icon v-else name='volume-2'></v-icon>
                   </b-checkbox-button>
@@ -67,6 +71,7 @@
 
 <script>
 import say from 'say';
+import { clearFocusMixin } from '../mixins/clearFocusMixin';
 
 export default {
   data() {
@@ -75,6 +80,7 @@ export default {
       muteDeflectionAudio: true,
     };
   },
+  mixins: [clearFocusMixin],
   computed: {
     activeEvent() {
       return this.$store.getters['core/activeEvent'];
@@ -134,6 +140,11 @@ export default {
       if (!this.elevation) return 'N/A';
       return `${this.elevation} mils`;
     },
+    elevationMuteTooltip() {
+      return `${
+        this.muteElevationAudio ? 'Mute' : 'Unmute'
+      } elevation readouts`;
+    },
     deflection() {
       if (!this.firingSolution) return null;
       return this.firingSolution.deflection;
@@ -142,10 +153,21 @@ export default {
       if (this.deflection === null) return 'N/A';
       return `${this.deflection}\xB0`;
     },
+    deflectionMuteTooltip() {
+      return `${
+        this.muteDeflectionAudio ? 'Mute' : 'Unmute'
+      } deflection readouts`;
+    },
   },
   watch: {
     firingSolution(newFiringSolution) {
       this.sayFiringSolution(newFiringSolution);
+    },
+    muteElevationAudio() {
+      this.clearFocus();
+    },
+    muteDeflectionAudio() {
+      this.clearFocus();
     },
   },
   methods: {
@@ -160,7 +182,7 @@ export default {
       }
       return result;
     },
-    sayFiringSolution({ deflection, elevation }) {
+    sayFiringSolution({ elevation, deflection }) {
       const sayMessageParts = [];
       if (!this.muteElevationAudio) {
         sayMessageParts.push(`elevation: ${this.splitNumber(elevation)}`);
@@ -183,7 +205,7 @@ export default {
 
 <style lang="scss" scoped>
 #wrapper {
-  margin-top: 24px;
-  margin-bottom: 24px;
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 </style>

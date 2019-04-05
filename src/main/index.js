@@ -34,9 +34,12 @@ const browserWindowDebugOptions = {
 };
 
 const browserWindowDefaultOptions = {
-  width: 350,
-  height: 370,
+  width: 770,
+  minWidth: 770,
+  height: 385,
+  minHeight: 385,
   show: false,
+  frame: false,
 };
 
 function createMain() {
