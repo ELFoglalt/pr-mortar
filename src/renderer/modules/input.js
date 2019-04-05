@@ -91,8 +91,9 @@ const activatorKeyCodes = [3612]; // LeftAlt
 const deactivatorKeyCodes = [
   28, // Enter
   3612, // Numpad enter
-  1, // Escape
 ];
+const cancelKeyCodes = [1]; // Escape
+const clearKeyCodes = [14]; // Backspace
 
 export function isActivatorEvent(event) {
   return activatorKeyCodes.includes(event.keycode);
@@ -100,7 +101,12 @@ export function isActivatorEvent(event) {
 export function isDeactivatorEvent(event) {
   return deactivatorKeyCodes.includes(event.keycode);
 }
-
+export function isCancelEvent(event) {
+  return cancelKeyCodes.includes(event.keycode);
+}
+export function isClearEvent(event) {
+  return clearKeyCodes.includes(event.keycode);
+}
 // export const activatorKeyCode = 3675; // LeftWin
 
 // export default { rawCharToChar, activatorRawChar };

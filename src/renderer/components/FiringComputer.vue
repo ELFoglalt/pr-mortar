@@ -1,17 +1,77 @@
 <template>
-  <div class='wrapper'>
-    <div>Firing Position: {{ firingPositionText }}</div>
-    <div>Target Position: {{ targetPositionText }}</div>
-    <div>Target offset: {{ targetOffsetText }}</div>
-    <div>Elevation: {{ elevationText }}</div>
-    <div>Deflection: {{ deflectionText }}</div>
+  <div id='wrapper'>
+    <div class='tile is-ancestor'>
+      <div class='tile is-vertical'>
+        <div class='tile'>
+          <div class='tile is-parent'>
+            <article class='tile is-one-third is-child notification'>
+              <p class='has-text-weight-bold has-text-grey'>Firing Position:</p>
+              <span class='has-text-primary'>{{ firingPositionText }}</span>
+            </article>
+          </div>
+          <div class='tile is-parent'>
+            <article class='tile is-one-third is-child notification'>
+              <p class='has-text-weight-bold has-text-grey'>Target Position:</p>
+              <span class='has-text-primary'>{{ targetPositionText }}</span>
+            </article>
+          </div>
+          <div class='tile is-parent'>
+            <article class='tile is-one-third is-child notification'>
+              <p class='has-text-weight-bold has-text-grey'>Target offset:</p>
+              <span class='has-text-primary'>{{ targetOffsetText }}</span>
+            </article>
+          </div>
+        </div>
+        <div class='tile'>
+          <div class='tile is-parent'>
+            <article class='tile is-half is-child notification'>
+              <div class='level'>
+                <div class='level-left'>
+                  <div>
+                    <span class='has-text-weight-bold has-text-grey'>Elevation:</span>
+                    <span class='has-text-primary'>{{ elevationText }}</span>
+                  </div>
+                </div>
+                <div class='level-right'>
+                  <b-checkbox-button disabled v-model='muteElevationAudio'>
+                    <v-icon v-if='muteElevationAudio' name='volume-x'></v-icon>
+                    <v-icon v-else name='volume-2'></v-icon>
+                  </b-checkbox-button>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class='tile is-parent'>
+            <article class='tile is-half is-child notification'>
+              <div class='level'>
+                <div class='level-left'>
+                  <div>
+                    <span class='has-text-weight-bold has-text-grey'>Deflection:</span>
+                    <span class='has-text-primary'>{{ deflectionText }}</span>
+                  </div>
+                </div>
+                <div class='level-right'>
+                  <b-checkbox-button disabled v-model='muteDeflectionAudio'>
+                    <v-icon v-if='muteDeflectionAudio' name='volume-x'></v-icon>
+                    <v-icon v-else name='volume-2'></v-icon>
+                  </b-checkbox-button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {};
+    return {
+      muteElevationAudio: true,
+      muteDeflectionAudio: true,
+    };
   },
   computed: {
     activeEvent() {
@@ -44,13 +104,13 @@ export default {
 
       const offsetParts = [];
       if (signY !== 0) {
-        const temp = `${yOffset * this.mapScale} m${
+        const temp = `${yOffset * this.mapScale} m ${
           signY <= 0 ? 'North' : 'South'
         }`;
         offsetParts.push(temp);
       }
       if (signX !== 0) {
-        const temp = `${xOffset * this.mapScale} m${
+        const temp = `${xOffset * this.mapScale} m ${
           signX <= 0 ? 'West' : 'East'
         }`;
         offsetParts.push(temp);
@@ -59,7 +119,7 @@ export default {
       if (offsetParts.length === 0) {
         return 'No offset';
       }
-      return offsetParts.join(' ');
+      return offsetParts.join(', ');
     },
     firingSolution() {
       return this.$store.getters['core/firingSolution'];
@@ -85,7 +145,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
+#wrapper {
   margin-top: 24px;
   margin-bottom: 24px;
 }

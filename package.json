@@ -63,6 +63,7 @@
     "unzipper": "^0.9.11",
     "vector2d": "^3.0.0",
     "vue": "^2.5.16",
+    "vue-icon": "git+https://github.com/ELFoglalt/vue-icon.git#3d95199",
     "vue-electron": "^1.0.6",
     "vuex": "^3.0.1",
     "vuex-electron": "^1.0.0",

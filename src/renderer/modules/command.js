@@ -9,12 +9,12 @@ const paramTypeDistance = 'distance';
 
 // TODO: Use RegExp for alias
 const commandTypeSFP = {
-  aliases: ['SFP', 'FP', '*'],
+  aliases: ['SFP', 'FP', '/'],
   description: 'Set Firing Position',
   paramType: paramTypePoint,
 };
 const commandTypeSTP = {
-  aliases: ['STP', 'TP', ','],
+  aliases: ['STP', 'TP', '*'],
   description: 'Set Target Position',
   paramType: paramTypePoint,
 };

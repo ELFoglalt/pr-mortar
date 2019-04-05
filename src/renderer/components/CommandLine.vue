@@ -6,7 +6,7 @@
         <b-input v-model='displayMessage' disabled></b-input>
       </b-field>
     </b-field>
-    <div id='message' :class='messageFlavour'>{{messageText}}</div>
+    <div id='message' :class='messageFlavour + " has-text-right"'>{{messageText}}</div>
   </div>
 </template>
 
@@ -16,6 +16,8 @@ import iohook from 'iohook';
 import {
   isActivatorEvent,
   isDeactivatorEvent,
+  isCancelEvent,
+  isClearEvent,
   rawCharToChar,
 } from '../modules/input.js';
 import { parseCommand, applyCommand } from '../modules/command.js';
@@ -36,7 +38,7 @@ export default {
     },
     displayMessage() {
       if (!this.isEnabled) {
-        return 'Hotkeyes disabled';
+        return 'Hotkeys disabled';
       }
       if (this.isRecording) {
         return this.commandBuffer;
@@ -89,15 +91,25 @@ export default {
       iohook.removeAllListeners();
     },
     handleKeyboardEvent(event) {
-      console.log(event);
       if (isActivatorEvent(event) && !this.isActive) {
         this.activate();
         return;
       }
-      if (isDeactivatorEvent(event) && this.isActive) {
-        this.deactivate();
-        this.parseBuffer();
-        return;
+      if (this.isActive) {
+        if (isCancelEvent(event)) {
+          this.deactivate();
+          this.clearBuffer();
+          return;
+        }
+        if (isDeactivatorEvent(event)) {
+          this.deactivate();
+          this.parseBuffer();
+          return;
+        }
+        if (isClearEvent(event)) {
+          this.commandBuffer = this.commandBuffer.slice(0, -1);
+          return;
+        }
       }
       if (this.isRecording) {
         this.commandBuffer += rawCharToChar(event.rawcode);
@@ -174,7 +186,6 @@ export default {
 <style lang="scss" scoped>
 #message {
   width: 100%;
-  text-align: right;
   margin-top: -10px;
 }
 </style>

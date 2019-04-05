@@ -9,7 +9,7 @@ Core:
   ✔ Map unzipping @done(19-03-23 15:21)
   ✔ Vue map, state, and command handling gi@done(19-03-24 00:28)
   ✔ UI for firing solution output @done(19-03-29 21:13)
-  ☐ Build keyboard blocking version of iohook
+  ✔ Build keyboard blocking version of iohook @done(19-04-05 21:20)
 
 
 Exploration:
@@ -26,9 +26,9 @@ Exploration:
   ☐ Explore image/printscreen based detection
 
 Enhancements:
-  ☐ Move keypress event handling purely to renderer thread
+  ✔ Move keypress event handling purely to renderer thread @done(19-04-05 21:21)
   ✔ Proper map open dialog. @done(19-03-24 00:27)
-  ☐ Nicer UI for firing computer
+  ✔ Nicer UI for firing computer @done(19-04-05 21:21)
   ☐ Persist window position
   ☐ Allow mixed prarameters (e.g. 'E14k2+50mE')
   ☐ Refactor commands to provide meaningful error and success messages
