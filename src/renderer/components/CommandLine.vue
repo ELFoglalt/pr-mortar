@@ -1,27 +1,30 @@
 <template>
   <div>
-    <b-field :type='inputFlavour' :message='messageText'>
-      <b-input v-model='displayMessage' disabled></b-input>
+    <b-field grouped>
+      <b-switch v-model='isEnabled'/>
+      <b-field :type='inputFlavour' expanded>
+        <b-input v-model='displayMessage' disabled></b-input>
+      </b-field>
     </b-field>
+    <div id='message' :class='messageFlavour'>{{messageText}}</div>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex';
 import iohook from 'iohook';
-import { activatorKeyCode, rawCharToChar } from '../modules/input.js';
+import {
+  isActivatorEvent,
+  isDeactivatorEvent,
+  rawCharToChar,
+} from '../modules/input.js';
 import { parseCommand, applyCommand } from '../modules/command.js';
 
 export default {
-  props: {
-    isEnabled: {
-      type: Boolean,
-      default: true,
-    },
-  },
   data() {
     return {
       isActive: false,
+      isEnabled: true,
       commandBuffer: '',
       messageType: '',
       messageText: '',
@@ -32,11 +35,23 @@ export default {
       return this.isEnabled && this.isActive;
     },
     displayMessage() {
-      return this.isRecording
-        ? this.commandBuffer
-        : "Hold 'left alt' to type commands";
+      if (!this.isEnabled) {
+        return 'Hotkeyes disabled';
+      }
+      if (this.isRecording) {
+        return this.commandBuffer;
+      }
+      return "Press 'numpad enter' to type commands";
+    },
+    messageFlavour() {
+      if (!this.isEnabled) return '';
+      if (this.messageType === 'error') return 'has-text-danger';
+      if (this.messageType === 'warning') return 'has-text-warning';
+      if (this.messageType === 'info') return 'has-text-success';
+      return '';
     },
     inputFlavour() {
+      if (!this.isEnabled) return '';
       if (this.messageType === 'error') return 'is-danger';
       if (this.messageType === 'warning') return 'is-warning';
       if (this.messageType === 'info') return 'is-success';
@@ -45,30 +60,27 @@ export default {
     ...mapState('core', ['prMap']),
     ...mapGetters('core', ['activeEvent']),
   },
-  mounted() {
-    this.startListeningForKeyboardEvents();
+  watch: {
+    isEnabled: {
+      immediate: true,
+      handler(newEnabled) {
+        if (newEnabled) {
+          this.startListeingForKeyboardEvents();
+        } else {
+          this.stopListeningForKeyboardEvents();
+        }
+        this.deactivate();
+        this.clearBuffer();
+      },
+    },
   },
   beforeDestroy() {
-    this.stopListeningForKeyboardEvents();
+    if (this.isEnabled) {
+      this.stopListeningForKeyboardEvents();
+    }
   },
   methods: {
-    handleKeyboardEvent(event) {
-      console.log(event);
-      if (event.type === 'keydown' && event.keycode === activatorKeyCode) {
-        this.activate();
-      }
-      if (event.type === 'keyup') {
-        if (event.keycode === activatorKeyCode) {
-          this.deactivate();
-        }
-
-        if (this.isRecording) {
-          this.commandBuffer += rawCharToChar(event.rawcode);
-        }
-      }
-    },
-    startListeningForKeyboardEvents() {
-      iohook.addListener('keydown', this.handleKeyboardEvent);
+    startListeingForKeyboardEvents() {
       iohook.addListener('keyup', this.handleKeyboardEvent);
       iohook.start();
     },
@@ -76,12 +88,41 @@ export default {
       iohook.stop();
       iohook.removeAllListeners();
     },
+    handleKeyboardEvent(event) {
+      console.log(event);
+      if (isActivatorEvent(event) && !this.isActive) {
+        this.activate();
+        return;
+      }
+      if (isDeactivatorEvent(event) && this.isActive) {
+        this.deactivate();
+        this.parseBuffer();
+        return;
+      }
+      if (this.isRecording) {
+        this.commandBuffer += rawCharToChar(event.rawcode);
+      }
+    },
     activate() {
+      if (!this.isEnabled) {
+        return;
+      }
       this.isActive = true;
+      iohook.disableKeyboardPropagation();
     },
     deactivate() {
+      if (!this.isEnabled) {
+        return;
+      }
       this.isActive = false;
-
+      iohook.enableKeyboardPropagation();
+    },
+    clearBuffer() {
+      this.commandBuffer = '';
+      this.messageType = '';
+      this.messageText = '';
+    },
+    parseBuffer() {
       if (!this.prMap) {
         this.commandBuffer = '';
         this.messageType = 'warning';
@@ -131,4 +172,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#message {
+  width: 100%;
+  text-align: right;
+  margin-top: -10px;
+}
 </style>

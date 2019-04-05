@@ -14,7 +14,7 @@ export default {
   computed: {
     mapDisplayName() {
       const { prMap } = this.$store.state.core;
-      return prMap ? prMap.mapName : 'Load map';
+      return prMap ? `Map: ${prMap.mapName}` : 'Load map';
     },
   },
   methods: {

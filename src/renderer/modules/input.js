@@ -87,7 +87,20 @@ export function rawCharToChar(raw) {
   return char || '';
 }
 
-export const activatorKeyCode = 56; // LeftAlt
+const activatorKeyCodes = [3612]; // LeftAlt
+const deactivatorKeyCodes = [
+  28, // Enter
+  3612, // Numpad enter
+  1, // Escape
+];
+
+export function isActivatorEvent(event) {
+  return activatorKeyCodes.includes(event.keycode);
+}
+export function isDeactivatorEvent(event) {
+  return deactivatorKeyCodes.includes(event.keycode);
+}
+
 // export const activatorKeyCode = 3675; // LeftWin
 
 // export default { rawCharToChar, activatorRawChar };
