@@ -33,7 +33,7 @@
                   </div>
                 </div>
                 <div class='level-right'>
-                  <b-checkbox-button disabled v-model='muteElevationAudio'>
+                  <b-checkbox-button v-model='muteElevationAudio'>
                     <v-icon v-if='muteElevationAudio' name='volume-x'></v-icon>
                     <v-icon v-else name='volume-2'></v-icon>
                   </b-checkbox-button>
@@ -51,7 +51,7 @@
                   </div>
                 </div>
                 <div class='level-right'>
-                  <b-checkbox-button disabled v-model='muteDeflectionAudio'>
+                  <b-checkbox-button v-model='muteDeflectionAudio'>
                     <v-icon v-if='muteDeflectionAudio' name='volume-x'></v-icon>
                     <v-icon v-else name='volume-2'></v-icon>
                   </b-checkbox-button>
@@ -66,6 +66,8 @@
 </template>
 
 <script>
+import say from 'say';
+
 export default {
   data() {
     return {
@@ -139,6 +141,41 @@ export default {
     deflectionText() {
       if (this.deflection === null) return 'N/A';
       return `${this.deflection}\xB0`;
+    },
+  },
+  watch: {
+    firingSolution(newFiringSolution) {
+      this.sayFiringSolution(newFiringSolution);
+    },
+  },
+  methods: {
+    splitNumber(number) {
+      number = number.toString();
+      if (number.length <= 2) return number;
+      if (number.length === 3) return number.split('').join(' ');
+
+      let result = '';
+      for (let i = 0; i < number.length; i += 1) {
+        result += i % 2 ? `${number[i]}` : ` ${number[i]}`;
+      }
+      return result;
+    },
+    sayFiringSolution({ deflection, elevation }) {
+      const sayMessageParts = [];
+      if (!this.muteElevationAudio) {
+        sayMessageParts.push(`elevation: ${this.splitNumber(elevation)}`);
+      }
+      if (!this.muteDeflectionAudio) {
+        sayMessageParts.push(`deflection: ${this.splitNumber(deflection)}`);
+      }
+
+      if (sayMessageParts.length === 0) {
+        return;
+      }
+
+      const sayMessage = sayMessageParts.join(', ');
+
+      say.speak(sayMessage, null, 1.3);
     },
   },
 };

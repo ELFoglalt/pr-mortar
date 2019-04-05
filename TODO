@@ -22,11 +22,10 @@ Exploration:
   ✔ Test input based on keystrokes @done(19-03-19 14:27)
       > Electron global shortucts *do not work*.
       > Use iohook
-  ☐ Test text to speech (say.js?)
+  ✔ Test to speech (say.js?) @done(19-04-05 22:05)
   ☐ Explore image/printscreen based detection
 
 Enhancements:
-  ✔ Move keypress event handling purely to renderer thread @done(19-04-05 21:21)
   ✔ Proper map open dialog. @done(19-03-24 00:27)
   ✔ Nicer UI for firing computer @done(19-04-05 21:21)
   ☐ Persist window position
@@ -37,3 +36,5 @@ Enhancements:
   ☐ Figure out how to read the minimap map .dds files (use libsquish?) (http://www.buckarooshangar.com/flightgear/tut_dds.html)
 
 Chores:
+  ✔ Move keypress event handling purely to renderer thread @done(19-04-05 21:21)
+  ☐ Move map loading purely to renderer thread using remote.
