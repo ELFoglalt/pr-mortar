@@ -87,13 +87,25 @@ export function rawCharToChar(raw) {
   return char || '';
 }
 
-const activatorKeyCodes = [3612]; // LeftAlt
-const deactivatorKeyCodes = [
+export const activatorKeyCodes = [3612]; // Numpad enter
+export const deactivatorKeyCodes = [
   28, // Enter
   3612, // Numpad enter
 ];
-const cancelKeyCodes = [1]; // Escape
-const clearKeyCodes = [14]; // Backspace
+export const cancelKeyCodes = [1]; // Escape
+export const clearKeyCodes = [14]; // Backspace
+
+const nameMapping = {
+  3612: 'Numpad Enter',
+  28: 'Enter',
+  1: 'Escape',
+  14: 'Backspace',
+};
+
+export function rawCharToName(raw) {
+  const name = nameMapping[raw];
+  return name || 'UNKNOWN KEY';
+}
 
 export function isActivatorEvent(event) {
   return activatorKeyCodes.includes(event.keycode);

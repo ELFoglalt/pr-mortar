@@ -72,6 +72,7 @@
 <script>
 import say from 'say';
 import { clearFocusMixin } from '../mixins/clearFocusMixin';
+import { commandTypeSFP } from '../modules/command';
 
 export default {
   data() {
@@ -142,7 +143,7 @@ export default {
     },
     elevationMuteTooltip() {
       return `${
-        this.muteElevationAudio ? 'Mute' : 'Unmute'
+        !this.muteElevationAudio ? 'Mute' : 'Unmute'
       } elevation readouts`;
     },
     deflection() {
@@ -155,12 +156,18 @@ export default {
     },
     deflectionMuteTooltip() {
       return `${
-        this.muteDeflectionAudio ? 'Mute' : 'Unmute'
+        !this.muteDeflectionAudio ? 'Mute' : 'Unmute'
       } deflection readouts`;
     },
   },
   watch: {
     firingSolution(newFiringSolution) {
+      if (
+        this.activeEvent.command &&
+        this.activeEvent.command.commandType === commandTypeSFP
+      ) {
+        return;
+      }
       this.sayFiringSolution(newFiringSolution);
     },
     muteElevationAudio() {
@@ -185,15 +192,24 @@ export default {
     sayFiringSolution({ elevation, deflection }) {
       const sayMessageParts = [];
       if (!this.muteElevationAudio) {
-        sayMessageParts.push(`elevation: ${this.splitNumber(elevation)}`);
+        if (elevation) {
+          // prettier-ignore
+          sayMessageParts.push(`${this.splitNumber(elevation)} ${!this.muteDeflectionAudio ? 'mils' : ''}`);
+        } else {
+          sayMessageParts.push('No solution');
+        }
       }
       if (!this.muteDeflectionAudio) {
-        sayMessageParts.push(`deflection: ${this.splitNumber(deflection)}`);
+        if (elevation && deflection !== null) {
+          // prettier-ignore
+          sayMessageParts.push(`${this.splitNumber(deflection)} ${!this.muteElevationAudio ? 'degrees' : ''}`);
+        }
       }
 
       if (sayMessageParts.length === 0) {
         return;
       }
+      say.stop();
 
       const sayMessage = sayMessageParts.join(', ');
 

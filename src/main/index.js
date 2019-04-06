@@ -34,12 +34,12 @@ const browserWindowDebugOptions = {
 };
 
 const browserWindowDefaultOptions = {
-  width: 770,
+  width: 1000,
   minWidth: 770,
-  height: 385,
-  minHeight: 385,
+  height: 465,
+  minHeight: 465,
   show: false,
-  frame: false,
+  /* frame: false, */
 };
 
 function createMain() {

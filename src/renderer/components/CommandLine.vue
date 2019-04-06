@@ -194,5 +194,6 @@ export default {
   width: 100%;
   margin-top: -10px;
   min-height: 24px;
+  margin-bottom: 10px;
 }
 </style>

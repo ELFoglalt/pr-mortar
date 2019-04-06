@@ -4,31 +4,31 @@ import { lookAtDirection } from './utils';
 import parseMapPoint from './map-point';
 import parseMapDistance from './map-distance';
 
-const paramTypePoint = 'point';
-const paramTypeDistance = 'distance';
+const paramTypePoint = '`<Point>`';
+const paramTypeDistance = '`<Distance>`';
 
 // TODO: Use RegExp for alias
-const commandTypeSFP = {
+export const commandTypeSFP = {
   aliases: ['SFP', 'FP', '/'],
   description: 'Set Firing Position',
   paramType: paramTypePoint,
 };
-const commandTypeSTP = {
+export const commandTypeSTP = {
   aliases: ['STP', 'TP', '*'],
   description: 'Set Target Position',
   paramType: paramTypePoint,
 };
-const commandTypeSTO = {
+export const commandTypeSTO = {
   aliases: ['STO', 'TO', '-'],
   description: 'Set Target Offset',
   paramType: paramTypeDistance,
 };
-const commandTypeATO = {
+export const commandTypeATO = {
   aliases: ['ATO', 'A', '+'],
   description: 'Adjust Target Offset',
   paramType: paramTypeDistance,
 };
-const allCommandTypes = [commandTypeSTP, commandTypeSFP, commandTypeSTO, commandTypeATO];
+export const allCommandTypes = [commandTypeSTP, commandTypeSFP, commandTypeSTO, commandTypeATO];
 
 function matchCommandToString(str, cmd) {
   const stru = str.toUpperCase();

@@ -66,6 +66,7 @@
     "vue": "^2.5.16",
     "vue-electron": "^1.0.6",
     "vue-icon": "git+https://github.com/ELFoglalt/vue-icon.git#3d95199",
+    "vue-showdown": "^2.4.0",
     "vuex": "^3.0.1",
     "vuex-electron": "^1.0.0",
     "winreg": "^1.2.4"
@@ -109,6 +110,7 @@
     "node-sass": "^4.11.0",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.21.0",
+    "template-string-loader": "0.0.4",
     "url-loader": "^1.0.1",
     "vue-html-loader": "^1.2.4",
     "vue-loader": "^15.2.4",

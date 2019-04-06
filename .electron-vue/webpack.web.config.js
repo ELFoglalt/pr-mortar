@@ -89,6 +89,10 @@ let webConfig = {
           },
         },
       },
+      {
+        test: /\.template.md$/i,
+        use: [{ loader: 'template-string-loader' }, { loader: 'babel-loader' }],
+      },
     ],
   },
   plugins: [
