@@ -19,7 +19,7 @@ if (process.env.NODE_ENV !== 'production') {
   app.setPath('userData', `${userDataPath}-(${process.env.NODE_ENV})`);
 }
 
-let mainWindow; // Keeping a reference to the window avoids it getting garbage collected.
+let mainWindow = null; // Keeping a reference to the window avoids it getting garbage collected.
 
 const winURL =
   process.env.NODE_ENV === 'development'
@@ -75,16 +75,28 @@ function createMain() {
   }
 }
 
-app.on('ready', createMain);
-
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit();
+const shouldQuit = app.makeSingleInstance(() => {
+  // Someone tried to run a second instance, we should focus our window.
+  if (mainWindow) {
+    if (mainWindow.isMinimized()) mainWindow.restore();
+    mainWindow.focus();
   }
 });
 
-app.on('activate', () => {
-  if (mainWindow === null) {
-    createMain();
-  }
-});
+if (shouldQuit) {
+  app.quit();
+} else {
+  app.on('ready', createMain);
+
+  app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
+      app.quit();
+    }
+  });
+
+  app.on('activate', () => {
+    if (mainWindow === null) {
+      createMain();
+    }
+  });
+}

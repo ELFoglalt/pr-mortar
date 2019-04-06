@@ -1,6 +1,6 @@
 {
   "name": "pr-mortar",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "Aleon <everydaymadnes@gmail.com>",
   "description": "A mortar calculator for the Battlefield 2 modification Project Reality.",
   "license": null,
@@ -42,15 +42,14 @@
         }
       ]
     },
-    "mac": {
-      "icon": "build/icons/icon.icns"
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "allowElevation": true
     },
     "win": {
       "icon": "build/icons/icon.ico",
       "requestedExecutionLevel": "highestAvailable"
-    },
-    "linux": {
-      "icon": "build/icons"
     }
   },
   "dependencies": {
